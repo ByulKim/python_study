@@ -47,3 +47,10 @@ plus(1,2)
 def minus(a, b=0) :
   print(a - b)
 minus(1,2)
+
+plus(b=30, a=2) #keyword argument
+
+def say_hi(name, age) :
+  return f"Hi {name} you are {age} years old"
+  # = return "Hi "+name+" you are "+age+" years old"
+print(say_hi("byul", 28))
