@@ -16,50 +16,49 @@
 #new_id에 나타날 수 있는 특수문자는 -_.~!@#$%^&*()=+[{]}:?,<>/ 로 한정됩니다.
 
 import re
+
+def del_dot(new_id): #앞,뒤 마침표 제거 함수
+    # while new_id:
+    #     if new_id[0] == "." : new_id = new_id[1:]
+    #     elif new_id[len(new_id) -1] == "." : new_id = new_id[0:len(new_id) -1]
+    #     else : break
+
+    new_id = re.sub("^[.]|[.]$","",new_id)
+            
+    return new_id
+
 def solution(new_id):
-    answer = ''
 
     #1단계
     new_id = new_id.lower()
 
     #2단계
-    new_id = re.sub(r"[^a-z0-9-_.]","",new_id)
+    new_id = re.sub("[^a-z0-9-_.]","",new_id)
 
     #3단계
-    while ".." in new_id:
-        new_id = new_id.replace("..",".")
+    # while ".." in new_id:
+    #     new_id = new_id.replace("..",".")
+    new_id = re.sub("\.+",".",new_id)
 
     #4단계
-    if len(new_id) > 0:
-        while (new_id[0] == "."): #시작부분
-            new_id = new_id[1:]
-
-        while (new_id[len(new_id) -1] == "."): #끝부분
-            new_id = new_id[0:len(new_id) -1]
+    new_id = del_dot(new_id)
 
     #5단계
-    if new_id == "":
+    if not new_id:
         new_id = "a"
 
     #6단계
     if len(new_id) >= 16:
         new_id = new_id[:15]
-    
-    while (new_id[0] == "."): #시작부분
-        new_id = new_id[1:]
-
-    while (new_id[len(new_id) -1] == "."): #끝부분
-        new_id = new_id[0:len(new_id) -1]
+    new_id = del_dot(new_id)
 
     #7단계
     while len(new_id) < 3:
         new_id = new_id + new_id[-1]
 
-    print(new_id)
+    return new_id
 
-    return answer
-
-solution("=.=")
+print(solution("abcdefghijklmn.p"))
 
 #no	new_id	result
 #예1	"...!@BaT#*..y.abcdefghijklm"	"bat.y.abcdefghi"
