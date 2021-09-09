@@ -3,7 +3,7 @@
 
 def solution(s):
 
-    answer = []
+    answer = len(s)
 
     for cnt in range(1,len(s)//2+1):
         num = 1 #연속개수
@@ -20,11 +20,11 @@ def solution(s):
             if num != 1 : total_length -= ((cnt*num) - (cnt+1)) #연속문자 길이 조정
             num = 1 #연속 개수 초기화
             
-        answer.append(total_length)
+        answer = total_length if answer > total_length else answer
 
-    return min(answer)
+    return answer
 
-print(solution("aabbaccc"))
+print(solution("ababcdcdababcdcd"))
 
 # s	result
 # "aabbaccc"	7 => 2a2ba3c (1자리 구분)
